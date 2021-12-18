@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True,
                                         primary_key=True,
-                                        erialize=False,
+                                        serialize=False,
                                         verbose_name='ID')),
                 ('title', models.CharField(help_text='Дайте название группе',
                                            max_length=200,
