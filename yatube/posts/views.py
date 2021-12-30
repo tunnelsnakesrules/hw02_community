@@ -1,5 +1,6 @@
+# posts/views.py
 from django.shortcuts import render, get_object_or_404
-
+# Импортируем модель, чтобы обратиться к ней
 from .models import Post, Group
 
 
