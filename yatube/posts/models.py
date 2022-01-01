@@ -5,13 +5,20 @@ User = get_user_model()
 
 
 class Group(models.Model):
-    title = models.CharField('Заголовок', max_length=200,
-                             help_text='Дайте краткое название группе')
-    slug = models.SlugField('Слаг',
-                            unique=True,
-                            help_text='Укажите ключ адреса страницы группы')
-    description = models.TextField('Описание группы',
-                                   help_text='Опишите группу')
+    title = models.CharField(
+        'Заголовок',
+        max_length=200,
+        help_text='Дайте краткое название группе'
+    )
+    slug = models.SlugField(
+        'Слаг',
+        unique=True,
+        help_text='Укажите ключ адреса страницы группы'
+    )
+    description = models.TextField(
+        'Описание группы',
+        help_text='Опишите группу'
+    )
 
     class Meta:
         verbose_name = 'Группа'
@@ -29,10 +36,17 @@ class Post(models.Model):
         on_delete=models.CASCADE,
         related_name='posts'
     )
-    group = models.ForeignKey(Group, blank=True, null=True,
-                              on_delete=models.SET_NULL,
-                              related_name='posts')
-    image = models.ImageField(upload_to='posts/', blank=True, null=True)
+    group = models.ForeignKey(
+        Group,
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='posts'
+    )
+    image = models.ImageField(
+        upload_to='posts/',
+        blank=True, null=True
+    )
 
     class Meta:
         ordering = ['-pub_date']
