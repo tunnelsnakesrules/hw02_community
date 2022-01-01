@@ -1,5 +1,6 @@
 """
-Комментарий добавлен для того чтобы исправить ошибку выдающую Pylint, я проверял на ошибки с Flake8
+Комментарий добавлен для того чтобы исправить ошибку выдающую Pylint,
+ я проверял на ошибки с Flake8
 """
 from django.shortcuts import render, get_object_or_404
 from .models import Post, Group
