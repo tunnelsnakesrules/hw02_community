@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
+
 {% block content %}
 <title>{{ title }}</title>
   <div class="container py-5">
-    <h1>{{ post.title }}</h1>
+    <h1>{{ group.title }}</h1>
       <p>
         {{ group.description }}
       </p>
@@ -20,5 +21,6 @@
     {% if not forloop.last %}<hr>{% endif %}
     {% endfor %}     
     </article>
-  </div class="container py-5">  
+  </div class="container py-5">
+  {% include 'posts/includes/paginator.html' %} 
 {% endblock %}

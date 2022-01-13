@@ -1,9 +1,26 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Об авторе проекта{% endblock %}
 {% block content %}
-<h1>Привет, я автор</h1>
-<p>
-  Тут я размещу информацию о себе используя свои умения верстать.
-  Картинки, блоки, элементы бустрап. А может быть, просто напишу несколько абзацев текста. 
-</p>
+<style>
+  .content{
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+</style>
+<div class="content">
+  <p>
+  <h1>Привет, я автор</h1><br>
+  <h3>Фото!</h3><br>
+    <img src="https://avatars.mds.yandex.net/get-zen_doc/30884/pub_5f6a39ea1e5aa661b5524383_5f6a451b740e327a1be2128c/scale_1200", width="100px"><br>
+    <ol class="rounded">
+      <li>Фарух. Учусь программировать. Пытаюсь гонятся за многими зайцами.</li>
+      <li>Хотелось бы найти что-то своё</li>
+      <li>Умею жонглировать</li>
+    </ol>
+  </p>
+</div>
 {% endblock %} 

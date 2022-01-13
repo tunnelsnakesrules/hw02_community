@@ -14,9 +14,13 @@ def index(request):
     paginator = Paginator(posts, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    title = 'Последние обновления на сайте'
+    text = 'Последние обновления на сайте'
     context = {
         'posts': posts,
         'page_obj': page_obj,
+        'title': title,
+        'text': text,
     }
     return render(request, 'posts/index.html', context)
 
@@ -24,12 +28,16 @@ def index(request):
 def group_posts(request, slug):
     group = get_object_or_404(Group, slug=slug)
     posts = group.posts.all()
+    paginator = Paginator(posts, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     title = "Здесь будет информация о группах проекта Yatube"
     context = {
         'group': group,
         'title': title,
         'posts': posts,
         'text': 'Информация о группах',
+        'page_obj': page_obj,
     }
     return render(request, 'posts/group_list.html', context)
 
@@ -81,9 +89,32 @@ def post_create(request):
     if form.is_valid():
         form.instance.author = request.user
         form.save()
-        return redirect('posts:profile', username=request.user.username)
+        return redirect(
+            'posts:profile',
+            username=request.user.username
+        )
     context = {
         'form': form,
         'select_group': select_group,
     }
     return render(request, template, context)
+
+
+def post_edit(request, post_id):
+    is_edit = True
+    post = get_object_or_404(Post, pk=post_id)
+    author = post.author
+    groups = Group.objects.all()
+    form = PostForm(request.POST or None, instance=post)
+    if request.user == author:
+        if request.method == 'POST' and form.is_valid:
+            post = form.save()
+            return redirect('posts:post_detail', post_id)
+        context = {
+            'form': form,
+            'is_edit': is_edit,
+            'post': post,
+            'groups': groups,
+        }
+        return render(request, 'posts/create_post.html', context)
+    return redirect('posts:post_detail', post_id)
